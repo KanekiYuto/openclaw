@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import { Link, usePathname } from '@/core/i18n/navigation';
 import { SmartIcon } from '@/shared/blocks/common/smart-icon';
@@ -30,10 +30,15 @@ export function ConsoleLayout({
   children: ReactNode;
 }) {
   const pathname = usePathname();
+  const [isMounted, setIsMounted] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const filteredItems = nav?.items.filter((item) =>
     item.title?.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const renderNavItems = () => (
     <nav className="space-y-1">
@@ -89,19 +94,23 @@ export function ConsoleLayout({
         <div className="container">
           <div className="flex items-center gap-4 py-8">
             {/* Mobile Menu Trigger */}
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className="md:hidden">
-                  <SmartIcon name="Menu" size={20} />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-64 px-4">
-                <SheetHeader className="mb-4 px-0">
-                  <SheetTitle>{title || 'Menu'}</SheetTitle>
-                </SheetHeader>
-                {renderNavItems()}
-              </SheetContent>
-            </Sheet>
+            {isMounted ? (
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="outline" size="icon" className="md:hidden">
+                    <SmartIcon name="Menu" size={20} />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-64 px-4">
+                  <SheetHeader className="mb-4 px-0">
+                    <SheetTitle>{title || 'Menu'}</SheetTitle>
+                  </SheetHeader>
+                  {renderNavItems()}
+                </SheetContent>
+              </Sheet>
+            ) : (
+              <div aria-hidden="true" className="size-9 md:hidden" />
+            )}
 
             <h1 className="text-foreground text-2xl font-semibold md:text-3xl">
               {title}
