@@ -49,7 +49,7 @@ export default async function BotConfigPage({
 
   return (
     <>
-      <Header crumbs={crumbs} show_locale={false} show_theme />
+      <Header crumbs={crumbs} show_theme />
       <Main>
         <MainHeader
           title={`${bot.appName} · ${t('config_page.title')}`}

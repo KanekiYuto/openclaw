@@ -29,6 +29,15 @@ export const user = table(
     utmSource: varchar('utm_source', { length: 100 }).notNull().default(''),
     ip: varchar('ip', { length: 45 }).notNull().default(''),
     locale: varchar('locale', { length: 20 }).notNull().default(''),
+    newapiUsername: varchar('newapi_username', { length: 64 })
+      .notNull()
+      .default(''),
+    newapiUserPass: varchar('newapi_user_pass', { length: 128 })
+      .notNull()
+      .default(''),
+    newapiUserId: varchar('newapi_user_id', { length: 64 }).notNull().default(''),
+    newapiAccessToken: text('newapi_access_token').notNull().default(''),
+    newapiUserDefaultToken: text('newapi_user_default_token').notNull().default(''),
   },
   (table) => [
     // Search users by name in admin dashboard

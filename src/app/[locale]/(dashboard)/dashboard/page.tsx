@@ -297,7 +297,7 @@ export default async function DashboardOverviewPage({
 
   return (
     <>
-      <Header crumbs={crumbs} show_locale={false} show_theme />
+      <Header crumbs={crumbs} show_theme />
       <Main>
         <MainHeader
           title={t('page.title')}

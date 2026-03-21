@@ -36,6 +36,11 @@ export const user = table(
     utmSource: text('utm_source').notNull().default(''),
     ip: text('ip').notNull().default(''),
     locale: text('locale').notNull().default(''),
+    newapiUsername: text('newapi_username').notNull().default(''),
+    newapiUserPass: text('newapi_user_pass').notNull().default(''),
+    newapiUserId: text('newapi_user_id').notNull().default(''),
+    newapiAccessToken: text('newapi_access_token').notNull().default(''),
+    newapiUserDefaultToken: text('newapi_user_default_token').notNull().default(''),
   },
   (table) => [
     // Search users by name in admin dashboard
