@@ -74,21 +74,6 @@
           ]
         }
       ]
-    },
-    {
-      "title": "业务",
-      "items": [
-        {
-          "title": "AI任务",
-          "url": "/admin/ai-tasks",
-          "icon": "Brain"
-        },
-        {
-          "title": "AI 对话",
-          "url": "/admin/chats",
-          "icon": "MessageCircle"
-        }
-      ]
     }
   ],
   "bottom_nav": {
@@ -97,11 +82,6 @@
         "title": "设置",
         "url": "/admin/settings/general",
         "icon": "Settings"
-      },
-      {
-        "title": "API密钥",
-        "url": "/admin/apikeys",
-        "icon": "Key"
       }
     ]
   },

@@ -1,0 +1,155 @@
+{
+  "page": {
+    "crumb": "总览",
+    "title": "运营看板",
+    "description": "在一个页面里查看 Bot、渠道和运行状态。",
+    "primary_action": "管理 Bots"
+  },
+  "hero": {
+    "eyebrow": "托管工作区",
+    "title": "在控制台里完成部署、监控与迭代。",
+    "description": "集中查看活跃部署、渠道健康度和最近使用情况，让团队持续推进上线节奏。",
+    "primary": "打开 Bot 列表",
+    "secondary": "进入 Bot 列表",
+    "chips": [
+      "3 个活跃 Bot",
+      "4 个已连接渠道",
+      "99.96% 在线率"
+    ],
+    "stats": [
+      {
+        "label": "月消息量",
+        "value": "18.4K",
+        "meta": "较上月提升 12%"
+      },
+      {
+        "label": "平均延迟",
+        "value": "248 ms",
+        "meta": "已启用全球边缘路由"
+      },
+      {
+        "label": "人工转接率",
+        "value": "2.8%",
+        "meta": "低于当前目标阈值"
+      },
+      {
+        "label": "部署健康度",
+        "value": "稳定",
+        "meta": "最近 7 天无事故"
+      }
+    ]
+  },
+  "stats": [
+    {
+      "title": "活跃 Bots",
+      "value": "3",
+      "description": "当前有 2 个生产 Bot 和 1 个预发布 Bot 正在承载流量。"
+    },
+    {
+      "title": "已处理消息",
+      "value": "18.4K",
+      "description": "最新一轮发布后，会话量仍在持续增长。"
+    },
+    {
+      "title": "SLA 健康度",
+      "value": "99.96%",
+      "description": "托管运行时仍稳定满足响应和可用性目标。"
+    },
+    {
+      "title": "中位响应",
+      "value": "248 ms",
+      "description": "延迟稳定低于 300 ms 的服务目标。"
+    }
+  ],
+  "sections": {
+    "activity": {
+      "eyebrow": "最近动态",
+      "title": "工作区里的最新变化",
+      "description": "部署、事件和模型切换都会集中显示在这里。",
+      "items": [
+        {
+          "title": "claw-support 已发布 v2.4",
+          "meta": "14 分钟前",
+          "description": "Telegram 与网页组件已经切换到新的系统提示词和检索链路。",
+          "tone": "success"
+        },
+        {
+          "title": "discord-helper 切换到 GPT-4o mini",
+          "meta": "46 分钟前",
+          "description": "社区支持流量的成本进一步下降，同时中位响应时间也更快。",
+          "tone": "info"
+        },
+        {
+          "title": "whatsapp-sales 已达到 78% 容量",
+          "meta": "2 小时前",
+          "description": "自动扩容已经接住峰值流量，但再增加一个热副本会更稳。",
+          "tone": "warning"
+        }
+      ]
+    },
+    "channels": {
+      "eyebrow": "渠道健康度",
+      "title": "已接入触点全部在线",
+      "description": "查看你已启用渠道的消息量和运行状态。",
+      "items": [
+        {
+          "name": "Telegram",
+          "status": "健康",
+          "value": "7.2K 条消息",
+          "progress": 82
+        },
+        {
+          "name": "Discord",
+          "status": "健康",
+          "value": "5.8K 条消息",
+          "progress": 74
+        },
+        {
+          "name": "WhatsApp",
+          "status": "已扩容",
+          "value": "3.1K 条消息",
+          "progress": 66
+        },
+        {
+          "name": "网页组件",
+          "status": "健康",
+          "value": "2.3K 条消息",
+          "progress": 58
+        }
+      ]
+    },
+    "usage": {
+      "eyebrow": "运行资源",
+      "title": "当前容量仍有余量",
+      "description": "查看现有托管集群的资源余量。",
+      "items": [
+        {
+          "label": "CPU 余量",
+          "value": "68%",
+          "progress": 68
+        },
+        {
+          "label": "内存余量",
+          "value": "54%",
+          "progress": 54
+        },
+        {
+          "label": "队列清空效率",
+          "value": "91%",
+          "progress": 91
+        }
+      ]
+    },
+    "checklist": {
+      "eyebrow": "下一步动作",
+      "title": "继续推进当前发布节奏",
+      "description": "一组短清单，帮助你继续提高覆盖率和稳定性。",
+      "items": [
+        "在下次营销活动前，为销售 Bot 补一个备用渠道。",
+        "等当前 A/B 测试达到显著性后，将预发布提示词方案转正。",
+        "追加一批 FAQ 文档，继续降低退款类问题的人工转接率。",
+        "在月底流量上涨前，复查账单阈值和 Token 包提醒。"
+      ]
+    }
+  }
+}

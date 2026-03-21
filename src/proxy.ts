@@ -19,11 +19,11 @@ export async function proxy(request: NextRequest) {
     ? pathname.slice(locale.length + 1)
     : pathname;
 
-  // Only check authentication for admin routes
+  // Only check authentication for protected routes
   if (
     pathWithoutLocale.startsWith('/admin') ||
-    pathWithoutLocale.startsWith('/settings') ||
-    pathWithoutLocale.startsWith('/activity')
+    pathWithoutLocale.startsWith('/dashboard') ||
+    pathWithoutLocale.startsWith('/settings')
   ) {
     // Check if session cookie exists
     const sessionCookie = getSessionCookie(request);
@@ -40,7 +40,7 @@ export async function proxy(request: NextRequest) {
       return NextResponse.redirect(signInUrl);
     }
 
-    // For admin routes, we need to check RBAC permissions
+    // Admin routes still require RBAC checks deeper in the app
     // Note: Full permission check happens in the page/API route level
     // This is a lightweight session check to prevent unauthorized access
     // The detailed permission check (admin.access and specific permissions)
@@ -51,11 +51,11 @@ export async function proxy(request: NextRequest) {
   intlResponse.headers.set('x-url', request.url);
 
   // Remove Set-Cookie from public pages to allow caching
-  // We exclude admin, settings, activity, and auth pages from this behavior
+  // We exclude admin, settings, and auth pages from this behavior
   if (
     !pathWithoutLocale.startsWith('/admin') &&
+    !pathWithoutLocale.startsWith('/dashboard') &&
     !pathWithoutLocale.startsWith('/settings') &&
-    !pathWithoutLocale.startsWith('/activity') &&
     !pathWithoutLocale.startsWith('/sign-') &&
     !pathWithoutLocale.startsWith('/auth')
   ) {

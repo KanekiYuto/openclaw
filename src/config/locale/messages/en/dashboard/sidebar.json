@@ -1,0 +1,274 @@
+{
+  "sidebar": {
+    "header": {
+      "brand": {
+        "title": "ClawGo Console",
+        "logo": {
+          "src": "/logo.png",
+          "alt": "ClawGo Console"
+        },
+        "url": "/dashboard"
+      },
+      "show_trigger": false
+    },
+    "buttons": [
+      {
+        "title": "Deploy Bot",
+        "icon": "Plus",
+        "type": "deploy-bot",
+        "url": "/dashboard/bots",
+        "variant": "default"
+      }
+    ],
+    "main_navs": [
+      {
+        "title": "Workspace",
+        "items": [
+          {
+            "title": "Dashboard",
+            "url": "/dashboard",
+            "icon": "LayoutDashboard"
+          },
+          {
+            "title": "Bots",
+            "url": "/dashboard/bots",
+            "icon": "Bot"
+          }
+        ]
+      },
+      {
+        "title": "Operations",
+        "items": [
+          {
+            "title": "Billing",
+            "url": "/settings/billing",
+            "icon": "CreditCard"
+          }
+        ]
+      }
+    ],
+    "bottom_nav": {
+      "items": [
+        {
+          "title": "Profile",
+          "url": "/settings/profile",
+          "icon": "User"
+        }
+      ]
+    },
+    "user": {
+      "nav": {
+        "items": [
+          {
+            "title": "Profile",
+            "url": "/settings/profile",
+            "icon": "User"
+          },
+          {
+            "title": "Payments",
+            "url": "/settings/payments",
+            "icon": "Wallet"
+          }
+        ]
+      },
+      "show_email": true,
+      "show_signout": true,
+      "signout_callback": "/",
+      "signin_callback": "/dashboard"
+    },
+    "footer": {
+      "nav": {
+        "items": [
+          {
+            "title": "Home",
+            "url": "/",
+            "icon": "Home"
+          },
+          {
+            "title": "Pricing",
+            "url": "/pricing",
+            "icon": "BadgeDollarSign"
+          }
+        ]
+      },
+      "show_theme": true,
+      "show_locale": false
+    },
+    "deploy_dialog": {
+      "title": "Deploy Bot",
+      "step_desc": "Step {step}/3: choose package, configure, then wait for connection.",
+      "steps": {
+        "plan": "Plan",
+        "quota": "Token pack",
+        "configure": "Configure",
+        "connect": "Connect"
+      },
+      "sections": {
+        "billing": "Billing cycle",
+        "package": "Package selection",
+        "quota": "Token quota package"
+      },
+      "groups": {
+        "basic": "Basic information",
+        "channels": "Channel configuration",
+        "deployment": "Deployment parameters"
+      },
+      "plans": {
+        "recommended": "Recommended",
+        "basic": {
+          "title": "Basic",
+          "description": "Balanced setup for regular workloads."
+        },
+        "pro": {
+          "title": "Pro",
+          "description": "Higher capacity for production traffic."
+        },
+        "max": {
+          "title": "Max",
+          "description": "Maximum capacity for high concurrency."
+        }
+      },
+      "billing": {
+        "aria_label": "Billing cycle",
+        "monthly": "Monthly",
+        "yearly": "Yearly",
+        "save_tag": "Save",
+        "monthly_suffix": "/mo",
+        "yearly_suffix": "/yr",
+        "yearly_hint": "Billed yearly with better unit cost."
+      },
+      "region_groups": {
+        "africa": "Africa",
+        "apac": "Asia Pacific",
+        "europe": "Europe",
+        "na": "North America",
+        "sa": "South America"
+      },
+      "regions": {
+        "jnb": "Johannesburg, South Africa (jnb)",
+        "bom": "Mumbai, India (bom)",
+        "sin": "Singapore, Singapore (sin)",
+        "syd": "Sydney, Australia (syd)",
+        "nrt": "Tokyo, Japan (nrt)",
+        "ams": "Amsterdam, Netherlands (ams)",
+        "fra": "Frankfurt, Germany (fra)",
+        "lhr": "London, United Kingdom (lhr)",
+        "cdg": "Paris, France (cdg)",
+        "arn": "Stockholm, Sweden (arn)",
+        "iad": "Ashburn, Virginia, US (iad)",
+        "ord": "Chicago, Illinois, US (ord)",
+        "dfw": "Dallas, Texas, US (dfw)",
+        "lax": "Los Angeles, California, US (lax)",
+        "sjc": "San Jose, California, US (sjc)",
+        "ewr": "Secaucus, New Jersey, US (ewr)",
+        "yyz": "Toronto, Canada (yyz)",
+        "gru": "Sao Paulo, Brazil (gru)"
+      },
+      "labels": {
+        "region": "Region",
+        "default_model": "Default model",
+        "cpu": "CPU",
+        "memory": "Memory",
+        "disk": "Disk",
+        "token_rate": "{credits} credits",
+        "bot_name": "Bot name",
+        "telegram": "Telegram Bot Token",
+        "discord": "Discord Bot Token",
+        "volume": "volume"
+      },
+      "placeholders": {
+        "select_region": "Select region",
+        "select_model": "Select default model",
+        "bot_name": "e.g. sales-assistant",
+        "newapi": "Enter NEWAPI_API_KEY",
+        "telegram": "Enter Telegram Bot Token",
+        "discord": "Enter Discord Bot Token"
+      },
+      "models": {
+        "gpt_41_mini": {
+          "name": "GPT-4.1 Mini",
+          "description": "Fast and cost-effective for daily automation and lightweight chat."
+        },
+        "gpt_54": {
+          "name": "GPT-5.4",
+          "description": "Best reasoning quality for complex tasks and higher accuracy needs."
+        },
+        "claude_sonnet_46": {
+          "name": "Claude Sonnet 4.6",
+          "description": "Balanced quality and latency for production bot workflows."
+        },
+        "claude_opus_46": {
+          "name": "Claude Opus 4.6",
+          "description": "Premium intelligence for advanced analysis and long-context prompts."
+        },
+        "claude_haiku_45": {
+          "name": "Claude Haiku 4.5",
+          "description": "Lower-latency response for high-throughput assistant scenarios."
+        },
+        "claude_35_haiku": {
+          "name": "Claude 3.5 Haiku",
+          "description": "Cost-conscious model suitable for routine support conversations."
+        },
+        "claude_3_haiku": {
+          "name": "Claude 3 Haiku",
+          "description": "Lightweight legacy option with minimal cost footprint."
+        }
+      },
+      "selected_plan": "{plan} package",
+      "quota": {
+        "description": "Choose a fixed token quota package before deployment.",
+        "unit": "tokens",
+        "purchase_failed": "Failed to create checkout",
+        "checkout_missing": "Checkout URL not found",
+        "packs": {
+          "starter": {
+            "title": "Basic Pack"
+          },
+          "standard": {
+            "title": "Pro Pack"
+          },
+          "premium": {
+            "title": "Max Pack"
+          }
+        }
+      },
+      "status": {
+        "deploying": "Deploying bot and waiting for first connection...",
+        "deploying_desc": "This can take around 20-90 seconds depending on the region.",
+        "success": "Deployment queued. Connection is being established."
+      },
+      "result": {
+        "deployment_id": "Deployment ID",
+        "app": "App",
+        "region": "Region",
+        "status": "Status",
+        "queued": "queued"
+      },
+      "actions": {
+        "cancel": "Cancel",
+        "next": "Next",
+        "back": "Back",
+        "deploy": "Deploy",
+        "skip_pack": "Already purchased, continue",
+        "buy_pack": "Buy selected pack",
+        "buying_pack": "Redirecting to checkout...",
+        "close": "Close",
+        "back_to_config": "Back to config",
+        "go_to_bots": "Go to Bots"
+      },
+      "errors": {
+        "bot_name_required": "Please input Bot name",
+        "newapi_required": "Please input NEWAPI_API_KEY",
+        "telegram_required": "Please input Telegram Bot Token",
+        "deploy_failed": "deploy bot failed"
+      },
+      "hints": {
+        "telegram_setup": "Need help creating and configuring a Telegram bot token?",
+        "telegram_docs": "View setup guide",
+        "discord_setup": "Need help creating and configuring a Discord bot token?",
+        "discord_docs": "View setup guide"
+      }
+    },
+    "variant": "sidebar"
+  }
+}

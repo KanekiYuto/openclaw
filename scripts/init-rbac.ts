@@ -143,29 +143,6 @@ const defaultPermissions = [
     description: 'Grant or consume credits',
   },
 
-  // API Keys management
-  {
-    code: 'admin.apikeys.read',
-    resource: 'apikeys',
-    action: 'read',
-    title: 'Read API Keys',
-    description: 'View API key list and details',
-  },
-  {
-    code: 'admin.apikeys.write',
-    resource: 'apikeys',
-    action: 'write',
-    title: 'Write API Keys',
-    description: 'Create and update API keys',
-  },
-  {
-    code: 'admin.apikeys.delete',
-    resource: 'apikeys',
-    action: 'delete',
-    title: 'Delete API Keys',
-    description: 'Delete API keys',
-  },
-
   // Settings management
   {
     code: 'admin.settings.read',
@@ -228,29 +205,6 @@ const defaultPermissions = [
     description: 'Delete permissions',
   },
 
-  // AI Tasks management
-  {
-    code: 'admin.ai-tasks.read',
-    resource: 'ai-tasks',
-    action: 'read',
-    title: 'Read AI Tasks',
-    description: 'View AI task list and details',
-  },
-  {
-    code: 'admin.ai-tasks.write',
-    resource: 'ai-tasks',
-    action: 'write',
-    title: 'Write AI Tasks',
-    description: 'Create and update AI tasks',
-  },
-  {
-    code: 'admin.ai-tasks.delete',
-    resource: 'ai-tasks',
-    action: 'delete',
-    title: 'Delete AI Tasks',
-    description: 'Delete AI tasks',
-  },
-
   // Wildcard permission for super admin
   {
     code: '*',
@@ -285,9 +239,7 @@ const defaultRoles = [
       'admin.payments.*',
       'admin.subscriptions.*',
       'admin.credits.*',
-      'admin.apikeys.*',
       'admin.settings.read',
-      'admin.ai-tasks.*',
     ],
   },
   {

@@ -1,0 +1,132 @@
+{
+  "page": {
+    "crumbs": {
+      "dashboard": "总览",
+      "bots": "Bots"
+    },
+    "title": "Bots 管理",
+    "description": "创建和管理你的 AI 助手。",
+    "primary_action": "返回总览"
+  },
+  "hero": {
+    "eyebrow": "Bot 管理",
+    "title": "集中查看你的 Bots",
+    "description": "快速查看每个 Bot 的状态、部署区域和资源配置。",
+    "primary": "打开总览",
+    "secondary": "打开聊天"
+  },
+  "instances": {
+    "eyebrow": "Bots",
+    "title": "Bot 列表",
+    "description": "查看当前所有 Bots。"
+  },
+  "empty": {
+    "title": "暂无 Bot",
+    "description": "部署第一个 Bot 后，这里会显示对应的运行信息。"
+  },
+  "labels": {
+    "machine_id": "机器 ID",
+    "cpu": "CPU",
+    "memory": "内存",
+    "created_at": "创建时间",
+    "updated_at": "更新时间",
+    "channel": "频道",
+    "initialize": "初始化",
+    "initializing": "初始化中...",
+    "initialize_success": "Bot 初始化完成",
+    "initialize_failed": "Bot 初始化失败",
+    "configure": "配置",
+    "openclaw_panel": "前往 OpenClaw 网关仪表盘",
+    "telegram_config": "配置 Telegram Bot",
+    "newapi_config": "配置 NEWAPI Key"
+  },
+  "config_page": {
+    "title": "Bot 配置",
+    "description": "部署完成后，在此配置 Telegram Bot 与配对。",
+    "back_to_bots": "返回 Bots",
+    "telegram_docs": "Telegram 配置文档",
+    "discord_docs": "Discord 配置文档",
+    "telegram_section": "配置 Telegram Bot",
+    "discord_section": "配置 Discord Bot",
+    "newapi_section": "配置 NEWAPI_API_KEY"
+  },
+  "telegram_modal": {
+    "title": "配置 {app} 的 Telegram Bot",
+    "tabs": {
+      "token": "Token 设置",
+      "pairing": "配对",
+      "newapi": "NEWAPI Key"
+    },
+    "token_label": "Telegram Bot Token",
+    "enabled_label": "启用",
+    "token_placeholder": "请输入 Telegram Bot Token",
+    "cancel": "取消",
+    "confirm": "保存",
+    "saving": "保存中...",
+    "save_success": "Telegram Bot Token 已保存",
+    "save_failed": "保存 Telegram Bot Token 失败",
+    "token_required": "请输入 Telegram Bot Token",
+    "pairing_description": "用于将 Telegram 私聊/群聊与当前 Bot 建立配对关系。",
+    "pairing_action": "刷新",
+    "pairing_load_failed": "加载配对请求失败",
+    "pairing_loading": "正在加载配对请求...",
+    "pairing_empty": "暂无配对请求",
+    "pairing_item_id": "ID",
+    "pairing_item_code": "配对码",
+    "pairing_item_tag": "标签",
+    "pairing_item_user": "用户名",
+    "pairing_item_name": "名称",
+    "pairing_item_account_id": "账号 ID",
+    "pairing_item_created_at": "创建时间",
+    "pairing_item_last_seen_at": "最后活跃时间",
+    "pairing_approve": "配对",
+    "pairing_approving": "配对中...",
+    "pairing_approve_success": "配对已通过",
+    "pairing_approve_failed": "配对通过失败",
+    "newapi_key_label": "NEWAPI_API_KEY",
+    "newapi_key_placeholder": "请输入 NEWAPI_API_KEY",
+    "newapi_key_required": "请输入 NEWAPI_API_KEY",
+    "newapi_saving": "保存中...",
+    "newapi_save_success": "NEWAPI_API_KEY 已保存",
+    "newapi_save_failed": "保存 NEWAPI_API_KEY 失败"
+  },
+  "newapi_modal": {
+    "title": "配置 {app} 的 NEWAPI_API_KEY",
+    "key_label": "NEWAPI_API_KEY",
+    "key_placeholder": "请输入 NEWAPI_API_KEY",
+    "key_required": "请输入 NEWAPI_API_KEY",
+    "cancel": "取消",
+    "confirm": "保存",
+    "saving": "保存中...",
+    "save_success": "NEWAPI_API_KEY 已保存",
+    "save_failed": "保存 NEWAPI_API_KEY 失败"
+  },
+  "discord_modal": {
+    "token_label": "Discord Bot Token",
+    "enabled_label": "启用",
+    "token_placeholder": "请输入 Discord Bot Token",
+    "cancel": "取消",
+    "confirm": "保存",
+    "saving": "保存中...",
+    "save_success": "Discord Bot Token 已保存",
+    "save_failed": "保存 Discord Bot Token 失败",
+    "token_required": "请输入 Discord Bot Token",
+    "pairing_description": "用于将 Discord 账号/频道与当前 Bot 建立配对关系。",
+    "pairing_action": "刷新",
+    "pairing_load_failed": "加载配对请求失败",
+    "pairing_loading": "正在加载配对请求...",
+    "pairing_empty": "暂无配对请求",
+    "pairing_item_id": "ID",
+    "pairing_item_code": "配对码",
+    "pairing_item_tag": "标签",
+    "pairing_item_user": "用户名",
+    "pairing_item_name": "名称",
+    "pairing_item_account_id": "账号 ID",
+    "pairing_item_created_at": "创建时间",
+    "pairing_item_last_seen_at": "最后活跃时间",
+    "pairing_approve": "配对",
+    "pairing_approving": "配对中...",
+    "pairing_approve_success": "配对已通过",
+    "pairing_approve_failed": "配对通过失败"
+  }
+}

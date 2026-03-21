@@ -1,0 +1,132 @@
+{
+  "page": {
+    "crumbs": {
+      "dashboard": "Dashboard",
+      "bots": "Bots"
+    },
+    "title": "Bots Management",
+    "description": "Create and manage your AI assistants.",
+    "primary_action": "Back to overview"
+  },
+  "hero": {
+    "eyebrow": "Bot management",
+    "title": "See all your Bots in one place",
+    "description": "Quickly review the status, deployment region, and resource setup of each Bot.",
+    "primary": "Open overview",
+    "secondary": "Open chat"
+  },
+  "instances": {
+    "eyebrow": "Bots",
+    "title": "Bot List",
+    "description": "View all current Bots."
+  },
+  "empty": {
+    "title": "No Bots yet",
+    "description": "After you deploy your first Bot, its runtime details will appear here."
+  },
+  "labels": {
+    "machine_id": "Machine ID",
+    "cpu": "CPU",
+    "memory": "Memory",
+    "created_at": "Created at",
+    "updated_at": "Updated at",
+    "channel": "Channel",
+    "initialize": "Initialize",
+    "initializing": "Initializing...",
+    "initialize_success": "Bot initialized",
+    "initialize_failed": "Bot initialization failed",
+    "configure": "Configure",
+    "openclaw_panel": "Open OpenClaw Gateway Dashboard",
+    "telegram_config": "Configure Telegram Bot",
+    "newapi_config": "Configure NEWAPI Key"
+  },
+  "config_page": {
+    "title": "Bot Configuration",
+    "description": "Configure Telegram Bot, pairing, and NEWAPI_API_KEY after deployment.",
+    "back_to_bots": "Back to Bots",
+    "telegram_docs": "Telegram setup docs",
+    "discord_docs": "Discord setup docs",
+    "telegram_section": "Configure Telegram Bot",
+    "discord_section": "Configure Discord Bot",
+    "newapi_section": "Configure NEWAPI_API_KEY"
+  },
+  "telegram_modal": {
+    "title": "Configure Telegram Bot for {app}",
+    "tabs": {
+      "token": "Token",
+      "pairing": "Pairing",
+      "newapi": "NEWAPI Key"
+    },
+    "token_label": "Telegram Bot Token",
+    "enabled_label": "Enabled",
+    "token_placeholder": "Enter Telegram Bot Token",
+    "cancel": "Cancel",
+    "confirm": "Save",
+    "saving": "Saving...",
+    "save_success": "Telegram Bot Token saved",
+    "save_failed": "Failed to save Telegram Bot Token",
+    "token_required": "Please enter Telegram Bot Token",
+    "pairing_description": "Use this tab to pair Telegram chats/channels with the current bot.",
+    "pairing_action": "Refresh",
+    "pairing_load_failed": "Failed to load pairing requests",
+    "pairing_loading": "Loading pairing requests...",
+    "pairing_empty": "No pairing requests yet",
+    "pairing_item_id": "ID",
+    "pairing_item_code": "Code",
+    "pairing_item_tag": "Tag",
+    "pairing_item_user": "Username",
+    "pairing_item_name": "First name",
+    "pairing_item_account_id": "Account ID",
+    "pairing_item_created_at": "Created at",
+    "pairing_item_last_seen_at": "Last seen at",
+    "pairing_approve": "Pair",
+    "pairing_approving": "Pairing...",
+    "pairing_approve_success": "Pairing approved",
+    "pairing_approve_failed": "Failed to approve pairing",
+    "newapi_key_label": "NEWAPI_API_KEY",
+    "newapi_key_placeholder": "Enter NEWAPI_API_KEY",
+    "newapi_key_required": "Please enter NEWAPI_API_KEY",
+    "newapi_saving": "Saving...",
+    "newapi_save_success": "NEWAPI_API_KEY saved",
+    "newapi_save_failed": "Failed to save NEWAPI_API_KEY"
+  },
+  "newapi_modal": {
+    "title": "Configure NEWAPI_API_KEY for {app}",
+    "key_label": "NEWAPI_API_KEY",
+    "key_placeholder": "Enter NEWAPI_API_KEY",
+    "key_required": "Please enter NEWAPI_API_KEY",
+    "cancel": "Cancel",
+    "confirm": "Save",
+    "saving": "Saving...",
+    "save_success": "NEWAPI_API_KEY saved",
+    "save_failed": "Failed to save NEWAPI_API_KEY"
+  },
+  "discord_modal": {
+    "token_label": "Discord Bot Token",
+    "enabled_label": "Enabled",
+    "token_placeholder": "Enter Discord Bot Token",
+    "cancel": "Cancel",
+    "confirm": "Save",
+    "saving": "Saving...",
+    "save_success": "Discord Bot Token saved",
+    "save_failed": "Failed to save Discord Bot Token",
+    "token_required": "Please enter Discord Bot Token",
+    "pairing_description": "Use this section to pair Discord accounts/channels with the current bot.",
+    "pairing_action": "Refresh",
+    "pairing_load_failed": "Failed to load pairing requests",
+    "pairing_loading": "Loading pairing requests...",
+    "pairing_empty": "No pairing requests yet",
+    "pairing_item_id": "ID",
+    "pairing_item_code": "Code",
+    "pairing_item_tag": "Tag",
+    "pairing_item_user": "Username",
+    "pairing_item_name": "First name",
+    "pairing_item_account_id": "Account ID",
+    "pairing_item_created_at": "Created at",
+    "pairing_item_last_seen_at": "Last seen at",
+    "pairing_approve": "Pair",
+    "pairing_approving": "Pairing...",
+    "pairing_approve_success": "Pairing approved",
+    "pairing_approve_failed": "Failed to approve pairing"
+  }
+}

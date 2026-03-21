@@ -74,21 +74,6 @@
           ]
         }
       ]
-    },
-    {
-      "title": "Business",
-      "items": [
-        {
-          "title": "AI Tasks",
-          "url": "/admin/ai-tasks",
-          "icon": "Brain"
-        },
-        {
-          "title": "AI Chats",
-          "url": "/admin/chats",
-          "icon": "MessageCircle"
-        }
-      ]
     }
   ],
   "bottom_nav": {
@@ -97,11 +82,6 @@
         "title": "Settings",
         "url": "/admin/settings/general",
         "icon": "Settings"
-      },
-      {
-        "title": "API Keys",
-        "url": "/admin/apikeys",
-        "icon": "Key"
       }
     ]
   },

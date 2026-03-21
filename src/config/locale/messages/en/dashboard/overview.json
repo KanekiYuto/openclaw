@@ -1,0 +1,155 @@
+{
+  "page": {
+    "crumb": "Dashboard",
+    "title": "Operations dashboard",
+    "description": "Monitor bots, channels, and runtime health from one place.",
+    "primary_action": "Manage bots"
+  },
+  "hero": {
+    "eyebrow": "Managed workspace",
+    "title": "Launch, monitor, and iterate without leaving the console.",
+    "description": "Keep an eye on active deployments, channel health, and recent usage while your team ships faster.",
+    "primary": "Open bot fleet",
+    "secondary": "Open bot list",
+    "chips": [
+      "3 active bots",
+      "4 connected channels",
+      "99.96% uptime"
+    ],
+    "stats": [
+      {
+        "label": "Monthly messages",
+        "value": "18.4K",
+        "meta": "+12% vs last month"
+      },
+      {
+        "label": "Average latency",
+        "value": "248 ms",
+        "meta": "Global edge routing enabled"
+      },
+      {
+        "label": "Escalation rate",
+        "value": "2.8%",
+        "meta": "Below your target threshold"
+      },
+      {
+        "label": "Deployment health",
+        "value": "Stable",
+        "meta": "No incidents in the last 7 days"
+      }
+    ]
+  },
+  "stats": [
+    {
+      "title": "Active bots",
+      "value": "3",
+      "description": "2 production bots and 1 staging bot are currently serving traffic."
+    },
+    {
+      "title": "Messages served",
+      "value": "18.4K",
+      "description": "Conversation volume is trending upward after the latest rollout."
+    },
+    {
+      "title": "SLA health",
+      "value": "99.96%",
+      "description": "Managed runtime is staying within your response and uptime targets."
+    },
+    {
+      "title": "Median response",
+      "value": "248 ms",
+      "description": "Latency remains comfortably below the 300 ms service target."
+    }
+  ],
+  "sections": {
+    "activity": {
+      "eyebrow": "Recent activity",
+      "title": "Latest changes across your workspace",
+      "description": "Deployments, incidents, and model switches are surfaced here.",
+      "items": [
+        {
+          "title": "claw-support rolled out v2.4",
+          "meta": "14 min ago",
+          "description": "Telegram and web widget are now pinned to the updated system prompt and retrieval stack.",
+          "tone": "success"
+        },
+        {
+          "title": "discord-helper switched to GPT-4o mini",
+          "meta": "46 min ago",
+          "description": "Fallback cost dropped while median response time improved across community support traffic.",
+          "tone": "info"
+        },
+        {
+          "title": "whatsapp-sales hit 78% capacity",
+          "meta": "2 hours ago",
+          "description": "Autoscaling absorbed the surge, but adding one more warm replica would reduce tail latency.",
+          "tone": "warning"
+        }
+      ]
+    },
+    "channels": {
+      "eyebrow": "Channel health",
+      "title": "Every connected touchpoint is live",
+      "description": "Response time and message volume across the channels you enabled.",
+      "items": [
+        {
+          "name": "Telegram",
+          "status": "Healthy",
+          "value": "7.2K msgs",
+          "progress": 82
+        },
+        {
+          "name": "Discord",
+          "status": "Healthy",
+          "value": "5.8K msgs",
+          "progress": 74
+        },
+        {
+          "name": "WhatsApp",
+          "status": "Scaled",
+          "value": "3.1K msgs",
+          "progress": 66
+        },
+        {
+          "name": "Web widget",
+          "status": "Healthy",
+          "value": "2.3K msgs",
+          "progress": 58
+        }
+      ]
+    },
+    "usage": {
+      "eyebrow": "Runtime usage",
+      "title": "Capacity is in a safe zone",
+      "description": "Resource headroom across the current managed cluster.",
+      "items": [
+        {
+          "label": "CPU headroom",
+          "value": "68%",
+          "progress": 68
+        },
+        {
+          "label": "Memory headroom",
+          "value": "54%",
+          "progress": 54
+        },
+        {
+          "label": "Queue drain speed",
+          "value": "91%",
+          "progress": 91
+        }
+      ]
+    },
+    "checklist": {
+      "eyebrow": "Next actions",
+      "title": "Keep the rollout moving",
+      "description": "A short list to tighten coverage and improve resilience.",
+      "items": [
+        "Connect one backup channel for your sales bot before the next campaign push.",
+        "Promote the staging prompt variant after the current A/B experiment reaches significance.",
+        "Add one more FAQ document batch to reduce escalations on refund questions.",
+        "Review billing thresholds and token pack alerts before month-end traffic spikes."
+      ]
+    }
+  }
+}

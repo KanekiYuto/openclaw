@@ -1,0 +1,272 @@
+{
+  "sidebar": {
+    "header": {
+      "brand": {
+        "title": "ClawGo 控制台",
+        "logo": {
+          "src": "/logo.png",
+          "alt": "ClawGo 控制台"
+        },
+        "url": "/dashboard"
+      },
+      "show_trigger": false
+    },
+    "buttons": [
+      {
+        "title": "部署 Bot",
+        "icon": "Plus",
+        "type": "deploy-bot",
+        "url": "/dashboard/bots",
+        "variant": "default"
+      }
+    ],
+    "main_navs": [
+      {
+        "title": "工作台",
+        "items": [
+          {
+            "title": "总览",
+            "url": "/dashboard",
+            "icon": "LayoutDashboard"
+          },
+          {
+            "title": "Bots",
+            "url": "/dashboard/bots",
+            "icon": "Bot"
+          }
+        ]
+      },
+      {
+        "title": "运营",
+        "items": [
+          {
+            "title": "账单",
+            "url": "/settings/billing",
+            "icon": "CreditCard"
+          }
+        ]
+      }
+    ],
+    "bottom_nav": {
+      "items": [
+        {
+          "title": "个人资料",
+          "url": "/settings/profile",
+          "icon": "User"
+        }
+      ]
+    },
+    "user": {
+      "nav": {
+        "items": [
+          {
+            "title": "个人资料",
+            "url": "/settings/profile",
+            "icon": "User"
+          },
+          {
+            "title": "支付记录",
+            "url": "/settings/payments",
+            "icon": "Wallet"
+          }
+        ]
+      },
+      "show_email": true,
+      "show_signout": true,
+      "signout_callback": "/",
+      "signin_callback": "/dashboard"
+    },
+    "footer": {
+      "nav": {
+        "items": [
+          {
+            "title": "首页",
+            "url": "/",
+            "icon": "Home"
+          },
+          {
+            "title": "价格",
+            "url": "/pricing",
+            "icon": "BadgeDollarSign"
+          }
+        ]
+      },
+      "show_theme": true,
+      "show_locale": false
+    },
+    "deploy_dialog": {
+      "title": "部署 Bot",
+      "step_desc": "第 {step}/3 步：请依次选择套餐、填写配置并等待连接",
+      "steps": {
+        "plan": "选择套餐",
+        "configure": "填写配置",
+        "connect": "等待连接",
+        "quota": "选择 Token 包"
+      },
+      "sections": {
+        "billing": "计费周期",
+        "package": "套餐规格",
+        "quota": "Token 额度包"
+      },
+      "groups": {
+        "basic": "基础信息",
+        "channels": "频道配置",
+        "deployment": "部署参数"
+      },
+      "plans": {
+        "recommended": "推荐",
+        "basic": {
+          "title": "Basic",
+          "description": "入门配置，适合轻量场景"
+        },
+        "pro": {
+          "title": "Pro",
+          "description": "均衡配置，适合大多数业务"
+        },
+        "max": {
+          "title": "Max",
+          "description": "高性能配置，适合高并发场景"
+        }
+      },
+      "billing": {
+        "aria_label": "计费周期",
+        "monthly": "按月",
+        "yearly": "按年",
+        "save_tag": "省",
+        "monthly_suffix": "/月",
+        "yearly_suffix": "/年",
+        "yearly_hint": "按年计费，单位成本更低"
+      },
+      "region_groups": {
+        "africa": "非洲",
+        "apac": "亚太",
+        "europe": "欧洲",
+        "na": "北美",
+        "sa": "南美"
+      },
+      "regions": {
+        "jnb": "南非约翰内斯堡 (jnb)",
+        "bom": "印度孟买 (bom)",
+        "sin": "新加坡 (sin)",
+        "syd": "澳大利亚悉尼 (syd)",
+        "nrt": "日本东京 (nrt)",
+        "ams": "荷兰阿姆斯特丹 (ams)",
+        "fra": "德国法兰克福 (fra)",
+        "lhr": "英国伦敦 (lhr)",
+        "cdg": "法国巴黎 (cdg)",
+        "arn": "瑞典斯德哥尔摩 (arn)",
+        "iad": "美国弗吉尼亚阿什本 (iad)",
+        "ord": "美国伊利诺伊芝加哥 (ord)",
+        "dfw": "美国德克萨斯达拉斯 (dfw)",
+        "lax": "美国加州洛杉矶 (lax)",
+        "sjc": "美国加州圣何塞 (sjc)",
+        "ewr": "美国新泽西锡考克斯 (ewr)",
+        "yyz": "加拿大多伦多 (yyz)",
+        "gru": "巴西圣保罗 (gru)"
+      },
+      "labels": {
+        "region": "部署区域",
+        "default_model": "默认模型",
+        "cpu": "CPU",
+        "memory": "内存",
+        "disk": "磁盘",
+        "bot_name": "Bot 名称",
+        "telegram": "Telegram Bot Token",
+        "discord": "Discord Bot Token",
+        "volume": "磁盘",
+        "token_rate": "{credits} 积分"
+      },
+      "placeholders": {
+        "select_region": "请选择部署区域",
+        "select_model": "请选择默认模型",
+        "bot_name": "例：sales-assistant",
+        "telegram": "请输入 Telegram Bot Token",
+        "discord": "请输入 Discord Bot Token"
+      },
+      "models": {
+        "gpt_41_mini": {
+          "name": "GPT-4.1 Mini",
+          "description": "速度快、成本低，适合日常自动化与轻量对话。"
+        },
+        "gpt_54": {
+          "name": "GPT-5.4",
+          "description": "推理能力更强，适合复杂任务与高准确率场景。"
+        },
+        "claude_sonnet_46": {
+          "name": "Claude Sonnet 4.6",
+          "description": "质量与延迟均衡，适合生产环境的通用 Bot。"
+        },
+        "claude_opus_46": {
+          "name": "Claude Opus 4.6",
+          "description": "高阶模型，适合深度分析与长上下文任务。"
+        },
+        "claude_haiku_45": {
+          "name": "Claude Haiku 4.5",
+          "description": "响应更快，适合高并发客服与实时交互。"
+        },
+        "claude_35_haiku": {
+          "name": "Claude 3.5 Haiku",
+          "description": "经济型选择，适合常规问答与基础支持。"
+        },
+        "claude_3_haiku": {
+          "name": "Claude 3 Haiku",
+          "description": "轻量旧版模型，成本更低。"
+        }
+      },
+      "selected_plan": "当前套餐：{plan}",
+      "status": {
+        "deploying": "正在部署 Bot，请稍候...",
+        "deploying_desc": "正在创建应用与实例，预计 20-90 秒",
+        "success": "部署已提交，开始等待连接"
+      },
+      "result": {
+        "deployment_id": "部署 ID",
+        "app": "应用",
+        "region": "区域",
+        "status": "状态",
+        "queued": "已排队"
+      },
+      "actions": {
+        "cancel": "取消",
+        "next": "下一步",
+        "back": "上一步",
+        "deploy": "确认部署",
+        "close": "关闭",
+        "back_to_config": "返回配置",
+        "go_to_bots": "前往 Bots",
+        "skip_pack": "我已购买，继续配置",
+        "buy_pack": "购买所选套餐",
+        "buying_pack": "正在跳转支付..."
+      },
+      "errors": {
+        "bot_name_required": "Bot 名称为必填项",
+        "telegram_required": "请填写 Telegram Bot Token",
+        "deploy_failed": "部署 Bot 失败"
+      },
+      "hints": {
+        "telegram_setup": "不会配置 Telegram Bot Token？",
+        "telegram_docs": "查看配置文档",
+        "discord_setup": "不会配置 Discord Bot Token？",
+        "discord_docs": "查看配置文档"
+      },
+      "quota": {
+        "description": "请先选择固定 Token 额度包，再进行部署。",
+        "unit": "Token",
+        "purchase_failed": "创建支付订单失败",
+        "checkout_missing": "未获取到支付链接",
+        "packs": {
+          "starter": {
+            "title": "Basic 套餐"
+          },
+          "standard": {
+            "title": "Pro 套餐"
+          },
+          "premium": {
+            "title": "Max 套餐"
+          }
+        }
+      }
+    },
+    "variant": "sidebar"
+  }
+}

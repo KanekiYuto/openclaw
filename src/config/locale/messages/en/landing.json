@@ -24,18 +24,6 @@
           "icon": "DollarSign"
         },
         {
-          "title": "AI",
-          "icon": "RiRobot2Line",
-          "children": [
-            {
-              "title": "AI Chatbot",
-              "description": "Chat with AI chatbot",
-              "url": "/chat",
-              "icon": "RiMessage2Line"
-            }
-          ]
-        },
-        {
           "title": "Content",
           "icon": "FileText",
           "children": [
@@ -66,11 +54,6 @@
           "title": "Billing",
           "url": "/settings/billing",
           "icon": "CreditCard"
-        },
-        {
-          "title": "Activity",
-          "url": "/activity",
-          "icon": "Activity"
         }
       ]
     },
@@ -123,7 +106,7 @@
             },
             {
               "title": "Chat",
-              "url": "/chat",
+              "url": "/docs",
               "target": "_self"
             }
           ]

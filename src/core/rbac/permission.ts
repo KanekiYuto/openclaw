@@ -38,11 +38,6 @@ export const PERMISSIONS = {
   CREDITS_READ: 'admin.credits.read',
   CREDITS_WRITE: 'admin.credits.write',
 
-  // API Keys
-  APIKEYS_READ: 'admin.apikeys.read',
-  APIKEYS_WRITE: 'admin.apikeys.write',
-  APIKEYS_DELETE: 'admin.apikeys.delete',
-
   // Settings
   SETTINGS_READ: 'admin.settings.read',
   SETTINGS_WRITE: 'admin.settings.write',
@@ -56,10 +51,6 @@ export const PERMISSIONS = {
   PERMISSIONS_WRITE: 'admin.permissions.write',
   PERMISSIONS_DELETE: 'admin.permissions.delete',
 
-  // AI Tasks
-  AITASKS_READ: 'admin.ai-tasks.read',
-  AITASKS_WRITE: 'admin.ai-tasks.write',
-  AITASKS_DELETE: 'admin.ai-tasks.delete',
 } as const;
 
 /**

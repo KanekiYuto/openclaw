@@ -1,4 +1,4 @@
-import {
+﻿import {
   boolean,
   index,
   integer,
@@ -121,6 +121,94 @@ export const config = table('config', {
   name: text('name').unique().notNull(),
   value: text('value'),
 });
+
+export const bot = table(
+  'bot',
+  {
+    id: text('id').primaryKey(), // Bot主键ID
+    botName: text('bot_name').notNull().default(''), // Bot名称
+    gatewayToken: text('gateway_token').notNull(), // 网关令牌
+    channelTelegramBotToken: text('channel_telegram_bot_token').notNull(), // Telegram机器人令牌
+    channelDiscordBotToken: text('channel_discord_bot_token').notNull().default(''), // Discord机器人令牌
+    createdAt: timestamp('created_at').defaultNow().notNull(), // 创建时间
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(), // 更新时间
+  },
+  (table) => [index('idx_bot_created_at').on(table.createdAt)]
+);
+
+export const botApp = table(
+  'bot_app',
+  {
+    id: text('id').primaryKey(), // 应用主键ID
+    botId: text('bot_id')
+      .notNull()
+      .references(() => bot.id, { onDelete: 'cascade' }), // 关联Bot ID
+    appName: text('app_name').notNull().unique(), // Fly应用名（全局唯一）
+    network: text('network').notNull(), // Fly网络名称
+    region: text('region').notNull(), // 应用部署区域
+    ip: text('ip').notNull().default(''), // 应用入口IP地址
+    createdAt: timestamp('created_at').defaultNow().notNull(), // 创建时间
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(), // 更新时间
+  },
+  (table) => [
+    index('idx_bot_app_bot_id').on(table.botId),
+    index('idx_bot_app_app_name').on(table.appName),
+    index('idx_bot_app_region').on(table.region),
+  ]
+);
+
+export const botMachine = table(
+  'bot_machine',
+  {
+    id: text('id').primaryKey(), // 机器记录主键ID
+    botAppId: text('bot_app_id')
+      .notNull()
+      .references(() => botApp.id, { onDelete: 'cascade' }), // 关联应用ID
+    machineId: text('machine_id').notNull().unique(), // Fly机器ID
+    cpuKind: text('cpu_kind').notNull(), // CPU规格类型
+    cpus: integer('cpus').notNull(), // vCPU数量
+    memoryMb: integer('memory_mb').notNull(), // 内存大小（MB）
+    machineState: text('machine_state').notNull(), // 机器运行状态
+    createdAt: timestamp('created_at').defaultNow().notNull(), // 创建时间
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(), // 更新时间
+  },
+  (table) => [
+    index('idx_bot_machine_app_id').on(table.botAppId),
+    index('idx_bot_machine_state').on(table.machineState),
+  ]
+);
+
+export const botVolume = table(
+  'bot_volume',
+  {
+    id: text('id').primaryKey(), // 磁盘记录主键ID
+    botMachineId: text('bot_machine_id')
+      .notNull()
+      .references(() => botMachine.id, { onDelete: 'cascade' }), // 关联机器ID
+    volumeName: text('volume_name').notNull(), // 磁盘逻辑名称
+    volumeId: text('volume_id'), // 云厂商磁盘ID
+    region: text('region').notNull(), // 磁盘区域
+    sizeGb: integer('size_gb').notNull(), // 磁盘大小（GB）
+    createdAt: timestamp('created_at').defaultNow().notNull(), // 创建时间
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(), // 更新时间
+  },
+  (table) => [
+    index('idx_bot_volume_machine_id').on(table.botMachineId),
+    index('idx_bot_volume_region').on(table.region),
+  ]
+);
 
 export const taxonomy = table(
   'taxonomy',
@@ -355,32 +443,6 @@ export const credit = table(
   ]
 );
 
-export const apikey = table(
-  'apikey',
-  {
-    id: text('id').primaryKey(),
-    userId: text('user_id')
-      .notNull()
-      .references(() => user.id, { onDelete: 'cascade' }),
-    key: text('key').notNull(),
-    title: text('title').notNull(),
-    status: text('status').notNull(),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
-    updatedAt: timestamp('updated_at')
-      .$onUpdate(() => /* @__PURE__ */ new Date())
-      .notNull(),
-    deletedAt: timestamp('deleted_at'),
-  },
-  (table) => [
-    // Composite: Query user's API keys by status
-    // Can also be used for: WHERE userId = ? (left-prefix)
-    index('idx_apikey_user_status').on(table.userId, table.status),
-    // Composite: Validate active API key (most common for auth)
-    // Can also be used for: WHERE key = ? (left-prefix)
-    index('idx_apikey_key_status').on(table.key, table.status),
-  ]
-);
-
 // RBAC Tables
 export const role = table(
   'role',
@@ -472,86 +534,5 @@ export const userRole = table(
   ]
 );
 
-export const aiTask = table(
-  'ai_task',
-  {
-    id: text('id').primaryKey(),
-    userId: text('user_id')
-      .notNull()
-      .references(() => user.id, { onDelete: 'cascade' }),
-    mediaType: text('media_type').notNull(),
-    provider: text('provider').notNull(),
-    model: text('model').notNull(),
-    prompt: text('prompt').notNull(),
-    options: text('options'),
-    status: text('status').notNull(),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
-    updatedAt: timestamp('updated_at')
-      .$onUpdate(() => /* @__PURE__ */ new Date())
-      .notNull(),
-    deletedAt: timestamp('deleted_at'),
-    taskId: text('task_id'), // provider task id
-    taskInfo: text('task_info'), // provider task info
-    taskResult: text('task_result'), // provider task result
-    costCredits: integer('cost_credits').notNull().default(0),
-    scene: text('scene').notNull().default(''),
-    creditId: text('credit_id'), // credit consumption record id
-  },
-  (table) => [
-    // Composite: Query user's AI tasks by status
-    // Can also be used for: WHERE userId = ? (left-prefix)
-    index('idx_ai_task_user_media_type').on(table.userId, table.mediaType),
-    // Composite: Query user's AI tasks by media type and provider
-    // Can also be used for: WHERE mediaType = ? AND provider = ? (left-prefix)
-    index('idx_ai_task_media_type_status').on(table.mediaType, table.status),
-  ]
-);
 
-export const chat = table(
-  'chat',
-  {
-    id: text('id').primaryKey(),
-    userId: text('user_id')
-      .notNull()
-      .references(() => user.id, { onDelete: 'cascade' }),
-    status: text('status').notNull(),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
-    updatedAt: timestamp('updated_at')
-      .$onUpdate(() => /* @__PURE__ */ new Date())
-      .notNull(),
-    model: text('model').notNull(),
-    provider: text('provider').notNull(),
-    title: text('title').notNull().default(''),
-    parts: text('parts').notNull(),
-    metadata: text('metadata'),
-    content: text('content'),
-  },
-  (table) => [index('idx_chat_user_status').on(table.userId, table.status)]
-);
 
-export const chatMessage = table(
-  'chat_message',
-  {
-    id: text('id').primaryKey(),
-    userId: text('user_id')
-      .notNull()
-      .references(() => user.id, { onDelete: 'cascade' }),
-    chatId: text('chat_id')
-      .notNull()
-      .references(() => chat.id, { onDelete: 'cascade' }),
-    status: text('status').notNull(),
-    createdAt: timestamp('created_at').defaultNow().notNull(),
-    updatedAt: timestamp('updated_at')
-      .$onUpdate(() => new Date())
-      .notNull(),
-    role: text('role').notNull(),
-    parts: text('parts').notNull(),
-    metadata: text('metadata'),
-    model: text('model').notNull(),
-    provider: text('provider').notNull(),
-  },
-  (table) => [
-    index('idx_chat_message_chat_id').on(table.chatId, table.status),
-    index('idx_chat_message_user_id').on(table.userId, table.status),
-  ]
-);

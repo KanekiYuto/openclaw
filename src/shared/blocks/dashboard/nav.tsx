@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 
-import { Link, usePathname, useRouter } from '@/core/i18n/navigation';
+import { Link, usePathname } from '@/core/i18n/navigation';
 import { SmartIcon } from '@/shared/blocks/common/smart-icon';
 import {
   Collapsible,
@@ -23,10 +23,40 @@ import {
 } from '@/shared/components/ui/sidebar';
 import { NavItem, type Nav as NavType } from '@/shared/types/blocks/common';
 
+function isPathActive(pathname: string, url?: string) {
+  if (!url) {
+    return false;
+  }
+
+  return pathname === url || pathname.startsWith(`${url}/`);
+}
+
+function getBestMatchUrl(pathname: string, items?: NavItem[]) {
+  if (!items?.length) {
+    return null;
+  }
+
+  let bestMatch: string | null = null;
+
+  for (const item of items) {
+    const url = item?.url;
+    if (!isPathActive(pathname, url)) {
+      continue;
+    }
+
+    if (!bestMatch || url!.length > bestMatch.length) {
+      bestMatch = url!;
+    }
+  }
+
+  return bestMatch;
+}
+
 export function Nav({ nav, className }: { nav: NavType; className?: string }) {
   const pathname = usePathname();
-  const router = useRouter();
   const [mounted, setMounted] = useState(false);
+
+  const activeItemUrl = mounted ? getBestMatchUrl(pathname, nav.items) : null;
 
   useEffect(() => {
     setMounted(true);
@@ -52,8 +82,8 @@ export function Nav({ nav, className }: { nav: NavType; className?: string }) {
                       className={`${
                         item?.is_active ||
                         (mounted &&
-                          item?.url &&
-                          pathname.startsWith(item?.url as string))
+                          (!!getBestMatchUrl(pathname, item.children) ||
+                            item?.url === activeItemUrl))
                           ? 'bg-sidebar-accent text-sidebar-accent-foreground hover:bg-sidebar-accent/90 hover:text-sidebar-accent-foreground active:bg-sidebar-accent/90 active:text-sidebar-accent-foreground min-w-8 duration-200 ease-linear'
                           : ''
                       }`}
@@ -69,9 +99,7 @@ export function Nav({ nav, className }: { nav: NavType; className?: string }) {
                     tooltip={item?.title}
                     className={`${
                       item?.is_active ||
-                      (mounted &&
-                        item?.url &&
-                        pathname.startsWith(item?.url as string))
+                      (mounted && item?.url === activeItemUrl)
                         ? 'bg-sidebar-accent text-sidebar-accent-foreground hover:bg-sidebar-accent/90 hover:text-sidebar-accent-foreground active:bg-sidebar-accent/90 active:text-sidebar-accent-foreground min-w-8 duration-200 ease-linear'
                         : ''
                     }`}
@@ -97,7 +125,11 @@ export function Nav({ nav, className }: { nav: NavType; className?: string }) {
                             className={`${
                               subItem.is_active ||
                               (mounted &&
-                                pathname.endsWith(subItem.url as string))
+                                subItem.url ===
+                                  getBestMatchUrl(
+                                    pathname,
+                                    item.children as NavItem[]
+                                  ))
                                 ? 'bg-sidebar-accent text-sidebar-accent-foreground hover:bg-sidebar-accent/90 hover:text-sidebar-accent-foreground active:bg-sidebar-accent/90 active:text-sidebar-accent-foreground min-w-8 duration-200 ease-linear'
                                 : ''
                             }`}
