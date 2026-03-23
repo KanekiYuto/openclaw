@@ -36,6 +36,57 @@ import {
   UpdateSubscription,
   updateSubscriptionBySubscriptionNo,
 } from '../models/subscription';
+import { findUserById } from '../models/user';
+import { redeemTopup } from './newapi';
+import { convertCreditsToQuota } from './newapi/utils';
+
+const syncNewApiQuotaForGrantedCredits = async (input: {
+  userId: string;
+  credits: number;
+  scene: 'subscription' | 'renewal' | 'one_time';
+  orderNo: string;
+}) => {
+  const credits = Number(input.credits);
+  if (!Number.isFinite(credits) || credits <= 0) {
+    return;
+  }
+
+  const quota = convertCreditsToQuota(credits);
+  if (!quota) {
+    console.log('[newapi] skip quota topup: quota is 0', input);
+    return;
+  }
+
+  const user = await findUserById(input.userId);
+  const accessToken = String(user?.newapiAccessToken || '').trim();
+  const userId = String(user?.newapiUserId || '').trim();
+  if (!accessToken || !userId) {
+    console.log('[newapi] skip quota topup: missing user newapi credentials', {
+      scene: input.scene,
+      orderNo: input.orderNo,
+      userId: input.userId,
+    });
+    return;
+  }
+
+  // Redemption code name must be 1-20 chars, prefer using order_no directly.
+  const name = String(input.orderNo || '').slice(0, 20);
+  const result = await redeemTopup({
+    name,
+    quota,
+    accessToken,
+    userId,
+  });
+
+  console.log('[newapi] quota topup by redemption success', {
+    scene: input.scene,
+    orderNo: input.orderNo,
+    credits,
+    quota,
+    redemptionKey: result.key,
+    toppedUpQuota: result.toppedUpQuota,
+  });
+};
 
 /**
  * get payment service with configs
@@ -252,6 +303,22 @@ export async function handleCheckoutSuccess({
       newSubscription,
       newCredit,
     });
+
+    if (
+      newCredit &&
+      (order.paymentType === PaymentType.SUBSCRIPTION ||
+        order.paymentType === PaymentType.ONE_TIME)
+    ) {
+      await syncNewApiQuotaForGrantedCredits({
+        userId: order.userId,
+        credits: newCredit.credits,
+        scene:
+          order.paymentType === PaymentType.ONE_TIME
+            ? 'one_time'
+            : 'subscription',
+        orderNo,
+      });
+    }
   } else if (
     session.paymentStatus === PaymentStatus.FAILED ||
     session.paymentStatus === PaymentStatus.CANCELED
@@ -389,6 +456,22 @@ export async function handlePaymentSuccess({
       newSubscription,
       newCredit,
     });
+
+    if (
+      newCredit &&
+      (order.paymentType === PaymentType.SUBSCRIPTION ||
+        order.paymentType === PaymentType.ONE_TIME)
+    ) {
+      await syncNewApiQuotaForGrantedCredits({
+        userId: order.userId,
+        credits: newCredit.credits,
+        scene:
+          order.paymentType === PaymentType.ONE_TIME
+            ? 'one_time'
+            : 'subscription',
+        orderNo,
+      });
+    }
   } else {
     throw new Error('unknown payment status');
   }
@@ -511,6 +594,15 @@ export async function handleSubscriptionRenewal({
       newOrder: order,
       newCredit,
     });
+
+    if (newCredit) {
+      await syncNewApiQuotaForGrantedCredits({
+        userId: order.userId,
+        credits: newCredit.credits,
+        scene: 'renewal',
+        orderNo,
+      });
+    }
   } else {
     throw new Error('unknown payment status');
   }

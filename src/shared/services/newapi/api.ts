@@ -13,10 +13,12 @@ import type {
   NewApiLoginPayload,
   NewApiLoginResult,
   NewApiLoginResponse,
+  NewApiRedemptionResponse,
   NewApiTokenKeyResponse,
   NewApiTokenListData,
   NewApiTokenListResponse,
   NewApiTokenPayload,
+  NewApiUserTopupResponse,
   NewApiUserTokenResponse,
   NewApiUserPayload,
 } from './types';
@@ -433,6 +435,144 @@ export async function getUserAccessToken(
       tokenLength: body.data.length,
     });
 
+    return body.data;
+  } finally {
+    close();
+  }
+}
+
+export async function createRedemption(options: {
+  name: string;
+  quota: number;
+}): Promise<string[]> {
+  const endpoint = getBaseEndpoint('/api/redemption/', true);
+  const { signal, close } = createRequestController();
+  const adminUserId = getAdminUserId();
+  const name = String(options.name || '').trim();
+  const quota = Number(options.quota);
+
+  if (!name) {
+    throw new Error('createRedemption requires name');
+  }
+  if (!Number.isFinite(quota) || quota <= 0) {
+    throw new Error('createRedemption requires valid quota');
+  }
+
+  try {
+    const payload = {
+      quota,
+      count: 1,
+      expired_time: 0,
+      name,
+    };
+    console.log('[newapi] create redemption request', {
+      endpoint,
+      payload,
+    });
+
+    const resp = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: getAuthorization(),
+        'New-Api-User': adminUserId,
+      },
+      body: JSON.stringify(payload),
+      signal,
+    });
+
+    const body = (await parseResponseBody(resp)) as Partial<NewApiRedemptionResponse> &
+      Record<string, unknown>;
+    if (!resp.ok) {
+      const message = getApiErrorMessage(
+        body,
+        `newapi create redemption failed: ${resp.status}`
+      );
+      console.log('[newapi] create redemption failed', {
+        endpoint,
+        status: resp.status,
+        body: summarizeBody(body),
+      });
+      throw new Error(message);
+    }
+
+    if (!body || !body.success || !Array.isArray(body.data)) {
+      throw new Error(getApiErrorMessage(body, 'newapi create redemption failed'));
+    }
+
+    console.log('[newapi] create redemption success', {
+      endpoint,
+      status: resp.status,
+      body: summarizeBody(body),
+    });
+    return body.data;
+  } finally {
+    close();
+  }
+}
+
+export async function userTopup(options: {
+  key: string;
+  authorization: string;
+  userId: string | number;
+}): Promise<number> {
+  const endpoint = getBaseEndpoint('/api/user/topup', true);
+  const { signal, close } = createRequestController();
+  const redemptionKey = String(options.key || '').trim();
+  const authorization = String(options.authorization || '').trim();
+  const userId = String(options.userId || '').trim();
+  if (!redemptionKey) {
+    throw new Error('userTopup requires key');
+  }
+  if (!authorization) {
+    throw new Error('userTopup requires authorization');
+  }
+  if (!userId) {
+    throw new Error('userTopup requires userId');
+  }
+
+  try {
+    const payload = { key: redemptionKey };
+    console.log('[newapi] user topup request', {
+      endpoint,
+      payload,
+    });
+
+    const resp = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: authorization,
+        'New-Api-User': userId,
+      },
+      body: JSON.stringify(payload),
+      signal,
+    });
+
+    const body = (await parseResponseBody(resp)) as Partial<NewApiUserTopupResponse> &
+      Record<string, unknown>;
+    if (!resp.ok) {
+      const message = getApiErrorMessage(
+        body,
+        `newapi user topup failed: ${resp.status}`
+      );
+      console.log('[newapi] user topup failed', {
+        endpoint,
+        status: resp.status,
+        body: summarizeBody(body),
+      });
+      throw new Error(message);
+    }
+
+    if (!body || !body.success || typeof body.data !== 'number') {
+      throw new Error(getApiErrorMessage(body, 'newapi user topup failed'));
+    }
+
+    console.log('[newapi] user topup success', {
+      endpoint,
+      status: resp.status,
+      data: body.data,
+    });
     return body.data;
   } finally {
     close();

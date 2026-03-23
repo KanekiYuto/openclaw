@@ -5,9 +5,7 @@
     "type": "类型",
     "scene": "场景",
     "credits": "积分",
-    "expires_at": "过期时间",
-    "created_at": "创建时间",
-    "action": "操作"
+    "created_at": "创建时间"
   },
   "list": {
     "title": "积分记录",
@@ -19,8 +17,29 @@
   },
   "view": {
     "title": "积分余额",
-    "buttons": {
-      "purchase": "购买积分"
+    "packages": {
+      "title": "积分包",
+      "credits": "积分",
+      "price": "价格",
+      "purchase": "立即支付",
+      "quota": "配额",
+      "items": {
+        "100": {
+          "name": "入门包",
+          "description": "适合基础测试与体验。",
+          "price": "¥9.90"
+        },
+        "500": {
+          "name": "标准包",
+          "description": "适合日常 Bot 运行。",
+          "price": "¥39.90"
+        },
+        "1000": {
+          "name": "专业包",
+          "description": "适合生产场景的高频使用。",
+          "price": "¥69.90"
+        }
+      }
     }
   }
 }

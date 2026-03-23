@@ -83,6 +83,11 @@ export function BotCardsClient({
   const [cards, setCards] = useState<BotCardView[]>(initialCards);
   const botIds = useMemo(() => initialCards.map((item) => item.id), [initialCards]);
 
+  // Keep internal list in sync with latest props loaded from API.
+  useEffect(() => {
+    setCards(initialCards);
+  }, [initialCards]);
+
   const resolveRegionLabel = (region: string) => {
     const code = (region || '').trim().toLowerCase();
     if (!code) return '-';

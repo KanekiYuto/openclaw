@@ -1,4 +1,4 @@
-import { envConfigs } from '..';
+﻿import { envConfigs } from '..';
 
 export const localeNames: any = {
   en: 'English',
@@ -19,7 +19,6 @@ export const localeMessagesPaths = [
   'common',
   'landing',
   'blog',
-  'pricing',
   'settings/sidebar',
   'settings/profile',
   'settings/security',
@@ -39,7 +38,7 @@ export const localeMessagesPaths = [
   'dashboard/sidebar',
   'dashboard/overview',
   'dashboard/bots',
+  'dashboard/pending_deploy',
   'pages/index',
-  'pages/pricing',
   'pages/blog',
 ];

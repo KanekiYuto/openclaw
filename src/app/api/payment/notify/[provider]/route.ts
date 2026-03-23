@@ -6,6 +6,11 @@ import {
   findOrderByOrderNo,
   findOrderByTransactionId,
 } from '@/shared/models/order';
+import {
+  BOT_PENDING_DEPLOY_PAYMENT_STATUS,
+  BOT_PENDING_DEPLOY_STATUS,
+  updateBotPendingDeployById,
+} from '@/shared/models/bot-pending-deploy';
 import { findSubscriptionByProviderSubscriptionId } from '@/shared/models/subscription';
 import {
   getPaymentService,
@@ -68,6 +73,19 @@ export async function POST(
         order,
         session,
       });
+
+      const pendingDeployId = String(
+        session?.metadata?.bot_pending_deploy_id || ''
+      ).trim();
+      if (pendingDeployId) {
+        await updateBotPendingDeployById(pendingDeployId, order.userId, {
+          status: BOT_PENDING_DEPLOY_STATUS.PAID,
+          paymentStatus: BOT_PENDING_DEPLOY_PAYMENT_STATUS.PAID,
+          paymentOrderNo: order.orderNo,
+          paymentProvider: order.paymentProvider || '',
+          errorMessage: '',
+        });
+      }
     } else if (eventType === PaymentEventType.PAYMENT_SUCCESS) {
       // handle subscription payment or one-time payment
       if (session.subscriptionId && session.subscriptionInfo) {
@@ -177,6 +195,19 @@ export async function POST(
           order,
           session,
         });
+
+        const pendingDeployId = String(
+          session?.metadata?.bot_pending_deploy_id || ''
+        ).trim();
+        if (pendingDeployId) {
+          await updateBotPendingDeployById(pendingDeployId, order.userId, {
+            status: BOT_PENDING_DEPLOY_STATUS.PAID,
+            paymentStatus: BOT_PENDING_DEPLOY_PAYMENT_STATUS.PAID,
+            paymentOrderNo: order.orderNo,
+            paymentProvider: order.paymentProvider || '',
+            errorMessage: '',
+          });
+        }
       }
     } else if (eventType === PaymentEventType.SUBSCRIBE_UPDATED) {
       // only handle subscription update

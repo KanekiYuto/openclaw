@@ -18,7 +18,6 @@ export * from './testimonials';
 export * from './faq';
 export * from './cta';
 export * from './subscribe';
-export * from './pricing';
 
 export * from './blog';
 export * from './blog-detail';

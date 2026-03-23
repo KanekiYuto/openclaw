@@ -123,6 +123,7 @@ export const bot = table(
     id: varchar191('id').primaryKey(), // Bot主键ID
     botName: varchar191('bot_name').notNull().default(''), // Bot名称
     gatewayToken: text('gateway_token').notNull(), // 网关令牌
+    apiToken: text('api_token').notNull().default(''), // NewAPI API Token
     channelTelegramBotToken: text('channel_telegram_bot_token').notNull(), // Telegram机器人令牌
     channelDiscordBotToken: text('channel_discord_bot_token').notNull().default(''), // Discord机器人令牌
     createdAt: timestamp('created_at').defaultNow().notNull(), // 创建时间
@@ -190,6 +191,41 @@ export const botVolume = table(
   (table) => [
     index('idx_bot_volume_machine_id').on(table.botMachineId),
     index('idx_bot_volume_region').on(table.region),
+  ]
+);
+
+export const botPendingDeploy = table(
+  'bot_pending_deploy',
+  {
+    id: varchar191('id').primaryKey(),
+    userId: varchar191('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    status: varchar('status', { length: 50 }).notNull().default('pending_payment'),
+    paymentStatus: varchar('payment_status', { length: 50 })
+      .notNull()
+      .default('pending'),
+    paymentOrderNo: varchar191('payment_order_no').notNull().default(''),
+    paymentProvider: varchar('payment_provider', { length: 50 })
+      .notNull()
+      .default(''),
+    checkoutUrl: text('checkout_url').notNull().default(''),
+    plan: varchar('plan', { length: 50 }).notNull(),
+    billingCycle: varchar('billing_cycle', { length: 50 }).notNull(),
+    region: varchar('region', { length: 100 }).notNull(),
+    model: varchar('model', { length: 191 }).notNull(),
+    botName: varchar('bot_name', { length: 191 }).notNull(),
+    telegramBotToken: text('telegram_bot_token').notNull().default(''),
+    discordBotToken: text('discord_bot_token').notNull().default(''),
+    deployedBotId: varchar191('deployed_bot_id').notNull().default(''),
+    deployResult: text('deploy_result').notNull().default(''),
+    errorMessage: text('error_message').notNull().default(''),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().onUpdateNow().notNull(),
+  },
+  (table) => [
+    index('idx_bot_pending_deploy_user_status').on(table.userId, table.status),
+    index('idx_bot_pending_deploy_created_at').on(table.createdAt),
   ]
 );
 

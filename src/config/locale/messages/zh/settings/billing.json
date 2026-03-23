@@ -12,14 +12,7 @@
     "action": "操作"
   },
   "view": {
-    "title": "当前计划",
-    "tip": "你的订阅将在 {date} 自动续费",
-    "end_tip": "你的订阅将在 {date} 自动取消",
-    "no_subscription": "未订阅",
     "buttons": {
-      "adjust": "调整计划",
-      "subscribe": "去订阅",
-      "manage": "管理订阅",
       "cancel": "取消订阅"
     }
   },

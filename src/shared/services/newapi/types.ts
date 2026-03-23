@@ -84,3 +84,15 @@ export type NewApiTokenListResponse = {
   message: string;
   success: boolean;
 };
+
+export type NewApiRedemptionResponse = {
+  data: string[];
+  message: string;
+  success: boolean;
+};
+
+export type NewApiUserTopupResponse = {
+  data: number;
+  message: string;
+  success: boolean;
+};

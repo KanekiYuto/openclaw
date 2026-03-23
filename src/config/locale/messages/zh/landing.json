@@ -19,9 +19,9 @@
           "icon": "Sparkles"
         },
         {
-          "title": "价格",
-          "url": "/pricing",
-          "icon": "DollarSign"
+          "title": "控制台",
+          "url": "/dashboard",
+          "icon": "LayoutDashboard"
         },
         {
           "title": "内容",
@@ -86,7 +86,7 @@
             },
             {
               "title": "价格",
-              "url": "/pricing",
+              "url": "/dashboard",
               "target": "_self"
             }
           ]

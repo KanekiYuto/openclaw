@@ -1,0 +1,77 @@
+{
+  "card": {
+    "description": "待部署任务",
+    "title": "部署状态"
+  },
+  "empty": {
+    "all": "当前没有待部署任务。",
+    "section": "暂无数据"
+  },
+  "sections": {
+    "pending_payment": "待支付",
+    "paid_waiting": "已支付待部署",
+    "deployed": "已部署"
+  },
+  "fields": {
+    "id": "ID",
+    "plan": "套餐",
+    "region": "区域",
+    "telegram_bot_token": "Telegram Bot Token",
+    "discord_bot_token": "Discord Bot Token",
+    "default_model": "默认模型",
+    "payment_status": "支付状态",
+    "created_at": "创建时间",
+    "period_start": "有效期开始",
+    "period_end": "有效期结束"
+  },
+  "deploy_status": {
+    "pending_payment": "待支付",
+    "paid": "已支付待部署",
+    "deploying": "部署中",
+    "deployed": "已部署",
+    "deploy_failed": "部署失败"
+  },
+  "payment_status": {
+    "pending": "待支付",
+    "paid": "已支付",
+    "failed": "支付失败"
+  },
+  "actions": {
+    "edit": "编辑配置",
+    "edit_loading": "保存中...",
+    "repay": "重新支付",
+    "repay_loading": "跳转中...",
+    "deploy": "执行部署",
+    "deploy_loading": "执行中..."
+  },
+  "edit": {
+    "title": "编辑待部署配置",
+    "description": "除套餐外，其他参数均可修改。",
+    "plan_readonly": "套餐（只读）",
+    "bot_name": "Bot 名称",
+    "region": "区域",
+    "default_model": "默认模型",
+    "telegram_bot_token": "Telegram Bot Token",
+    "discord_bot_token": "Discord Bot Token",
+    "cancel": "取消",
+    "save": "保存更改"
+  },
+  "confirm": {
+    "title": "确认部署",
+    "description": "请确认部署参数，确认后将执行部署。",
+    "bot_name": "Bot 名称",
+    "plan": "套餐",
+    "region": "区域",
+    "default_model": "默认模型",
+    "telegram_bot_token": "Telegram Bot Token",
+    "discord_bot_token": "Discord Bot Token",
+    "cancel": "取消",
+    "confirm": "确认部署"
+  },
+  "toast": {
+    "redirecting_payment": "正在跳转支付",
+    "deploy_submitted": "部署任务已提交",
+    "update_success": "配置已更新",
+    "bot_name_required": "Bot 名称不能为空"
+  }
+}

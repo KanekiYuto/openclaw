@@ -19,9 +19,9 @@
           "icon": "Sparkles"
         },
         {
-          "title": "Pricing",
-          "url": "/pricing",
-          "icon": "DollarSign"
+          "title": "Dashboard",
+          "url": "/dashboard",
+          "icon": "LayoutDashboard"
         },
         {
           "title": "Content",
@@ -86,7 +86,7 @@
             },
             {
               "title": "Pricing",
-              "url": "/pricing",
+              "url": "/dashboard",
               "target": "_self"
             }
           ]

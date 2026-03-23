@@ -2,10 +2,15 @@
 
 import { useMemo, useState } from 'react';
 import { CheckCircle2, Circle, Coins, LoaderCircle } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { Link } from '@/core/i18n/navigation';
+import {
+  BOT_DEPLOY_PLAN_KEYS,
+  BOT_DEPLOY_PLANS,
+  type DeployPlan,
+} from '@/shared/config/bot-deploy-plans';
 import { SmartIcon } from '@/shared/blocks/common';
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -29,7 +34,7 @@ import {
 import { cn } from '@/shared/lib/utils';
 import { Button as ButtonType } from '@/shared/types/blocks/common';
 
-type PlanKey = 'basic' | 'pro' | 'max';
+type PlanKey = DeployPlan;
 type BillingCycle = 'monthly' | 'yearly';
 type ModelOptionKey =
   | 'gpt_41_mini'
@@ -47,50 +52,6 @@ type DeployResult = {
   region: string;
   model?: string;
 };
-
-const PLAN_OPTIONS: Array<{
-  key: PlanKey;
-  cpus: number;
-  memoryMb: number;
-  volumeGb: number;
-  monthlyCredits: string;
-  yearlyCredits: string;
-  monthlyPrice: number;
-  yearlyPrice: number;
-  recommended?: boolean;
-}> = [
-  {
-    key: 'basic',
-    cpus: 2,
-    memoryMb: 4096,
-    volumeGb: 40,
-    monthlyCredits: '1.5k',
-    yearlyCredits: '18k',
-    monthlyPrice: 19,
-    yearlyPrice: 190,
-  },
-  {
-    key: 'pro',
-    cpus: 4,
-    memoryMb: 8192,
-    volumeGb: 80,
-    monthlyCredits: '7.5k',
-    yearlyCredits: '90k',
-    monthlyPrice: 49,
-    yearlyPrice: 490,
-    recommended: true,
-  },
-  {
-    key: 'max',
-    cpus: 8,
-    memoryMb: 16384,
-    volumeGb: 160,
-    monthlyCredits: '30k',
-    yearlyCredits: '360k',
-    monthlyPrice: 99,
-    yearlyPrice: 990,
-  },
-];
 
 const REGION_GROUPS = [
   {
@@ -183,6 +144,15 @@ function formatMemory(memoryMb: number) {
   }
 }
 
+function formatCredits(value: number) {
+  if (!Number.isFinite(value)) return '0';
+  if (value >= 1000) {
+    const k = value / 1000;
+    return Number.isInteger(k) ? `${k}k` : `${k.toFixed(1)}k`;
+  }
+  return String(value);
+}
+
 export function DeployBotDialog({
   button,
   isCollapsed,
@@ -191,6 +161,7 @@ export function DeployBotDialog({
   isCollapsed: boolean;
 }) {
   const t = useTranslations('dashboard.sidebar.sidebar.deploy_dialog');
+  const locale = useLocale();
 
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -206,7 +177,7 @@ export function DeployBotDialog({
   const [deployResult, setDeployResult] = useState<DeployResult | null>(null);
 
   const selectedPlan = useMemo(
-    () => PLAN_OPTIONS.find((item) => item.key === plan) || PLAN_OPTIONS[0],
+    () => BOT_DEPLOY_PLANS[plan],
     [plan]
   );
   const selectedModel = useMemo(
@@ -247,7 +218,7 @@ export function DeployBotDialog({
       setIsSubmitting(true);
       setStep(3);
 
-      const resp = await fetch('/api/bot/deploy', {
+      const resp = await fetch('/api/bot/pending-deploy', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -260,6 +231,7 @@ export function DeployBotDialog({
           botName: name,
           telegramBotToken: token,
           discordBotToken: discord,
+          locale,
         }),
       });
 
@@ -272,10 +244,16 @@ export function DeployBotDialog({
         throw new Error(result.message || t('errors.deploy_failed'));
       }
 
+      const checkoutUrl = String(result?.data?.checkoutUrl || '').trim();
+      if (!checkoutUrl) {
+        throw new Error('checkout url is empty');
+      }
+
       setDeployResult(result.data || null);
-      toast.success(`${button.title || 'Deploy Bot'} queued`, {
-        description: result.data?.id,
+      toast.success('Pending deploy created', {
+        description: 'Redirecting to payment checkout...',
       });
+      window.location.href = checkoutUrl;
     } catch (e: any) {
       const message = e.message || t('errors.deploy_failed');
       setSubmitError(message);
@@ -390,21 +368,23 @@ export function DeployBotDialog({
                 <div className="space-y-2">
                   <div className="text-sm font-medium">{t('sections.package')}</div>
                   <div className="grid gap-3 sm:grid-cols-3">
-                    {PLAN_OPTIONS.map((item) => (
+                    {BOT_DEPLOY_PLAN_KEYS.map((planKey) => {
+                      const item = BOT_DEPLOY_PLANS[planKey];
+                      return (
                       <button
-                        key={item.key}
+                        key={planKey}
                         type="button"
                         className={cn(
                           'rounded-xl border p-0 text-left transition-colors',
-                          plan === item.key
+                          plan === planKey
                             ? 'border-primary bg-primary/5'
                             : 'hover:bg-muted/30'
                         )}
-                        onClick={() => setPlan(item.key)}
+                        onClick={() => setPlan(planKey)}
                       >
                         <div className="border-b px-3 py-3">
                           <div className="flex items-center justify-between gap-2">
-                            <div className="font-medium">{t(`plans.${item.key}.title`)}</div>
+                            <div className="font-medium">{t(`plans.${planKey}.title`)}</div>
                             {item.recommended && (
                               <div className="rounded-md border border-primary/40 px-1.5 py-0.5 text-[10px] text-primary">
                                 {t('plans.recommended')}
@@ -412,7 +392,7 @@ export function DeployBotDialog({
                             )}
                           </div>
                           <div className="text-muted-foreground mt-1 text-xs leading-5">
-                            {t(`plans.${item.key}.description`)}
+                            {t(`plans.${planKey}.description`)}
                           </div>
                         </div>
                         <div className="px-3 py-3">
@@ -433,8 +413,8 @@ export function DeployBotDialog({
                                 {t('labels.token_rate', {
                                   credits:
                                     billingCycle === 'monthly'
-                                      ? item.monthlyCredits
-                                      : item.yearlyCredits,
+                                      ? formatCredits(item.monthlyCredits)
+                                      : formatCredits(item.yearlyCredits),
                                 })}
                               </span>
                             </div>
@@ -466,7 +446,8 @@ export function DeployBotDialog({
                           </div>
                         </div>
                       </button>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -479,11 +460,11 @@ export function DeployBotDialog({
                     <div>
                       <div className="text-sm font-medium">
                         {t('selected_plan', {
-                          plan: t(`plans.${selectedPlan.key}.title`),
+                          plan: t(`plans.${plan}.title`),
                         })}
                       </div>
                       <div className="text-muted-foreground mt-1 text-xs">
-                        {t(`plans.${selectedPlan.key}.description`)}
+                        {t(`plans.${plan}.description`)}
                       </div>
                     </div>
                     <div className="rounded-full border px-2.5 py-1 text-xs">

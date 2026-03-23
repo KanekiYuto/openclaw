@@ -86,7 +86,7 @@
           },
           {
             "title": "Pricing",
-            "url": "/pricing",
+            "url": "/dashboard",
             "icon": "BadgeDollarSign"
           }
         ]
@@ -96,12 +96,12 @@
     },
     "deploy_dialog": {
       "title": "Deploy Bot",
-      "step_desc": "Step {step}/3: choose package, configure, then wait for connection.",
+      "step_desc": "Step {step}/3: choose package, configure, then complete payment.",
       "steps": {
         "plan": "Plan",
         "quota": "Token pack",
         "configure": "Configure",
-        "connect": "Connect"
+        "connect": "Payment"
       },
       "sections": {
         "billing": "Billing cycle",
@@ -233,9 +233,9 @@
         }
       },
       "status": {
-        "deploying": "Deploying bot and waiting for first connection...",
-        "deploying_desc": "This can take around 20-90 seconds depending on the region.",
-        "success": "Deployment queued. Connection is being established."
+        "deploying": "Preparing payment checkout...",
+        "deploying_desc": "You will be redirected to complete payment.",
+        "success": "Pending deployment created. Waiting for payment confirmation."
       },
       "result": {
         "deployment_id": "Deployment ID",

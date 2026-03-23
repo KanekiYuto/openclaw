@@ -17,6 +17,7 @@ export type BotRecord = {
   botName: string;
   machineState: string;
   gatewayToken: string;
+  apiToken: string;
   telegramBotToken: string;
   discordBotToken: string;
   createdAt: unknown;
@@ -28,6 +29,7 @@ export type NewBotRecord = {
     id: string;
     botName: string;
     gatewayToken: string;
+    apiToken: string;
     channelTelegramBotToken: string;
     channelDiscordBotToken: string;
   };
@@ -63,6 +65,7 @@ export async function createBot(newBot: NewBotRecord) {
         id: newBot.bot.id,
         botName: newBot.bot.botName,
         gatewayToken: newBot.bot.gatewayToken,
+        apiToken: newBot.bot.apiToken,
         channelTelegramBotToken: newBot.bot.channelTelegramBotToken,
         channelDiscordBotToken: newBot.bot.channelDiscordBotToken,
       })
@@ -130,6 +133,7 @@ function listBotsQuery() {
       botName: bot.botName,
       machineState: botMachine.machineState,
       gatewayToken: bot.gatewayToken,
+      apiToken: bot.apiToken,
       telegramBotToken: bot.channelTelegramBotToken,
       discordBotToken: bot.channelDiscordBotToken,
       createdAt: bot.createdAt,

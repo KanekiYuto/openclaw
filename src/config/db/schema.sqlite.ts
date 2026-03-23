@@ -137,6 +137,7 @@ export const bot = table(
     id: text('id').primaryKey(), // Bot主键ID
     botName: text('bot_name').notNull().default(''), // Bot名称
     gatewayToken: text('gateway_token').notNull(), // 网关令牌
+    apiToken: text('api_token').notNull().default(''), // NewAPI API Token
     channelTelegramBotToken: text('channel_telegram_bot_token').notNull(), // Telegram机器人令牌
     channelDiscordBotToken: text('channel_discord_bot_token').notNull().default(''), // Discord机器人令牌
     createdAt: integer('created_at', { mode: 'timestamp_ms' })
@@ -224,6 +225,42 @@ export const botVolume = table(
   (table) => [
     index('idx_bot_volume_machine_id').on(table.botMachineId),
     index('idx_bot_volume_region').on(table.region),
+  ]
+);
+
+export const botPendingDeploy = table(
+  'bot_pending_deploy',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    status: text('status').notNull().default('pending_payment'),
+    paymentStatus: text('payment_status').notNull().default('pending'),
+    paymentOrderNo: text('payment_order_no').notNull().default(''),
+    paymentProvider: text('payment_provider').notNull().default(''),
+    checkoutUrl: text('checkout_url').notNull().default(''),
+    plan: text('plan').notNull(),
+    billingCycle: text('billing_cycle').notNull(),
+    region: text('region').notNull(),
+    model: text('model').notNull(),
+    botName: text('bot_name').notNull(),
+    telegramBotToken: text('telegram_bot_token').notNull().default(''),
+    discordBotToken: text('discord_bot_token').notNull().default(''),
+    deployedBotId: text('deployed_bot_id').notNull().default(''),
+    deployResult: text('deploy_result').notNull().default(''),
+    errorMessage: text('error_message').notNull().default(''),
+    createdAt: integer('created_at', { mode: 'timestamp_ms' })
+      .default(sqliteNowMs)
+      .notNull(),
+    updatedAt: integer('updated_at', { mode: 'timestamp_ms' })
+      .default(sqliteNowMs)
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  },
+  (table) => [
+    index('idx_bot_pending_deploy_user_status').on(table.userId, table.status),
+    index('idx_bot_pending_deploy_created_at').on(table.createdAt),
   ]
 );
 

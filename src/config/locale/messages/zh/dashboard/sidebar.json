@@ -86,7 +86,7 @@
           },
           {
             "title": "价格",
-            "url": "/pricing",
+            "url": "/dashboard",
             "icon": "BadgeDollarSign"
           }
         ]
@@ -96,11 +96,11 @@
     },
     "deploy_dialog": {
       "title": "部署 Bot",
-      "step_desc": "第 {step}/3 步：请依次选择套餐、填写配置并等待连接",
+      "step_desc": "第 {step}/3 步：请依次选择套餐、填写配置并完成支付。",
       "steps": {
         "plan": "选择套餐",
         "configure": "填写配置",
-        "connect": "等待连接",
+        "connect": "支付确认",
         "quota": "选择 Token 包"
       },
       "sections": {
@@ -132,7 +132,7 @@
         "aria_label": "计费周期",
         "monthly": "按月",
         "yearly": "按年",
-        "save_tag": "省",
+        "save_tag": "ʡ",
         "monthly_suffix": "/月",
         "yearly_suffix": "/年",
         "yearly_hint": "按年计费，单位成本更低"
@@ -215,15 +215,15 @@
       },
       "selected_plan": "当前套餐：{plan}",
       "status": {
-        "deploying": "正在部署 Bot，请稍候...",
-        "deploying_desc": "正在创建应用与实例，预计 20-90 秒",
-        "success": "部署已提交，开始等待连接"
+        "deploying": "正在准备支付链接...",
+        "deploying_desc": "即将跳转支付页面，请完成支付。",
+        "success": "待部署任务已创建，等待支付确认。"
       },
       "result": {
         "deployment_id": "部署 ID",
         "app": "应用",
         "region": "区域",
-        "status": "状态",
+        "status": "״̬",
         "queued": "已排队"
       },
       "actions": {

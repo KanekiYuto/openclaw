@@ -5,9 +5,7 @@
     "type": "Type",
     "scene": "Scene",
     "credits": "Credits",
-    "expires_at": "Expires At",
-    "created_at": "Created At",
-    "action": "Action"
+    "created_at": "Created At"
   },
   "list": {
     "title": "Credits Records",
@@ -19,8 +17,29 @@
   },
   "view": {
     "title": "Credits Balance",
-    "buttons": {
-      "purchase": "Purchase Credits"
+    "packages": {
+      "title": "Credits Packages",
+      "credits": "Credits",
+      "price": "Price",
+      "purchase": "Pay Now",
+      "quota": "Quota",
+      "items": {
+        "100": {
+          "name": "Starter Pack",
+          "description": "For basic testing and trial usage.",
+          "price": "$9.90"
+        },
+        "500": {
+          "name": "Standard Pack",
+          "description": "For regular bot operations.",
+          "price": "$39.90"
+        },
+        "1000": {
+          "name": "Pro Pack",
+          "description": "For high-frequency production usage.",
+          "price": "$69.90"
+        }
+      }
     }
   }
 }

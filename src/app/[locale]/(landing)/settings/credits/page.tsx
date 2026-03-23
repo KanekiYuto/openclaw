@@ -1,10 +1,9 @@
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { Coins } from 'lucide-react';
 
 import { Empty } from '@/shared/blocks/common';
-import { PanelCard } from '@/shared/blocks/panel';
 import { TableCard } from '@/shared/blocks/table';
 import {
-  Credit,
   CreditStatus,
   CreditTransactionType,
   getCredits,
@@ -30,6 +29,7 @@ export default async function CreditsPage({
   }
 
   const t = await getTranslations('settings.credits');
+  const locale = await getLocale();
 
   const total = await getCreditsCount({
     transactionType: type as CreditTransactionType,
@@ -74,13 +74,6 @@ export default async function CreditsPage({
         metadata: { variant: 'outline' },
       },
       {
-        name: 'expiresAt',
-        title: t('fields.expires_at'),
-        type: 'time',
-        placeholder: '-',
-        metadata: { format: 'YYYY-MM-DD HH:mm:ss' },
-      },
-      {
         name: 'createdAt',
         title: t('fields.created_at'),
         type: 'time',
@@ -95,6 +88,22 @@ export default async function CreditsPage({
   };
 
   const remainingCredits = await getRemainingCredits(user.id);
+  const formattedRemainingCredits = new Intl.NumberFormat().format(
+    remainingCredits
+  );
+  const packageCredits = [100, 500, 1000];
+  const packageProductIds: Record<number, string> = {
+    100: 'credits-100',
+    500: 'credits-500',
+    1000: 'credits-1000',
+  };
+  const packageItems = packageCredits.map((creditsValue) => ({
+    creditsValue,
+    productId: packageProductIds[creditsValue],
+    name: t(`view.packages.items.${creditsValue}.name` as any),
+    description: t(`view.packages.items.${creditsValue}.description` as any),
+    price: t(`view.packages.items.${creditsValue}.price` as any),
+  }));
 
   const tabs: Tab[] = [
     {
@@ -119,22 +128,51 @@ export default async function CreditsPage({
 
   return (
     <div className="space-y-8">
-      <PanelCard
-        title={t('view.title')}
-        buttons={[
-          {
-            title: t('view.buttons.purchase'),
-            url: '/pricing',
-            target: '_blank',
-            icon: 'Coins',
-          },
-        ]}
-        className="max-w-md"
-      >
-        <div className="text-primary text-3xl font-bold">
-          {remainingCredits}
+      <div className="rounded-xl border bg-card p-5 shadow-sm sm:p-6">
+        <div className="mb-4 flex items-center gap-2 text-sm font-medium text-foreground">
+          <Coins className="text-primary h-4 w-4" />
+          <span>{t('view.title')}</span>
         </div>
-      </PanelCard>
+        <div className="text-primary text-4xl leading-none font-bold tracking-tight sm:text-5xl">
+          {formattedRemainingCredits}
+        </div>
+        <div className="text-muted-foreground mt-2 text-xs">
+          {t('fields.credits')}
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <div className="text-base font-semibold">{t('view.packages.title')}</div>
+        <div className="grid gap-3 md:grid-cols-3">
+          {packageItems.map((item) => (
+            <div
+              key={item.creditsValue}
+              className="rounded-xl border bg-card p-4 shadow-sm"
+            >
+              <div className="text-sm font-semibold">{item.name}</div>
+              <div className="text-muted-foreground mt-1 text-xs">
+                {item.description}
+              </div>
+              <div className="mt-3 text-sm">
+                {t('view.packages.credits')}:{' '}
+                <span className="font-semibold">{item.creditsValue}</span>
+              </div>
+              <div className="mt-1 text-sm">
+                {t('view.packages.price')}:{' '}
+                <span className="text-primary font-semibold">{item.price}</span>
+              </div>
+              <div className="mt-4">
+                <a
+                  href={`/api/payment/checkout?product_id=${item.productId}&locale=${locale}`}
+                  className="inline-flex h-9 w-full items-center justify-center rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  {t('view.packages.purchase')}
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
       <TableCard title={t('list.title')} tabs={tabs} table={table} />
     </div>
   );

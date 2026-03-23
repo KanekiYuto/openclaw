@@ -12,14 +12,7 @@
     "action": "Action"
   },
   "view": {
-    "title": "Current Plan",
-    "tip": "Your subscription will auto renew on {date}",
-    "end_tip": "Your subscription will be auto canceled on {date}",
-    "no_subscription": "No plan",
     "buttons": {
-      "adjust": "Adjust Plan",
-      "subscribe": "Subscribe",
-      "manage": "Manage Subscription",
       "cancel": "Cancel Subscription"
     }
   },

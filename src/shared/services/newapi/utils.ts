@@ -10,6 +10,8 @@ const DEFAULT_USERNAME_MAX_LEN = 16;
 const DEFAULT_PASSWORD_LEN = 12;
 const MIN_PASSWORD_LEN = 8;
 const MAX_PASSWORD_LEN = 32;
+const CREDITS_TO_QUOTA_BASE_CREDITS = 1;
+const CREDITS_TO_QUOTA_BASE_QUOTA = 5000;
 
 export function sanitizeText(value: unknown, maxLen: number) {
   const text = typeof value === 'string' ? value.trim() : '';
@@ -147,4 +149,17 @@ export function getApiErrorMessage(body: any, fallback: string) {
     return String(body.message || body.error);
   }
   return fallback;
+}
+
+// 积分转换为 NewAPI 配额：1 积分 = 5000 配额
+export function convertCreditsToQuota(credits: number) {
+  const normalizedCredits = Number(credits);
+  if (!Number.isFinite(normalizedCredits) || normalizedCredits <= 0) {
+    return 0;
+  }
+
+  return Math.floor(
+    (normalizedCredits * CREDITS_TO_QUOTA_BASE_QUOTA) /
+    CREDITS_TO_QUOTA_BASE_CREDITS
+  );
 }

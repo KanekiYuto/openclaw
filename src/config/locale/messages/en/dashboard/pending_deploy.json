@@ -1,0 +1,77 @@
+{
+  "card": {
+    "description": "Pending Deployments",
+    "title": "Deployment Status"
+  },
+  "empty": {
+    "all": "No pending deployment tasks.",
+    "section": "No data"
+  },
+  "sections": {
+    "pending_payment": "Pending Payment",
+    "paid_waiting": "Paid, Waiting Deploy",
+    "deployed": "Deployed"
+  },
+  "fields": {
+    "id": "ID",
+    "plan": "Plan",
+    "region": "Region",
+    "telegram_bot_token": "Telegram Bot Token",
+    "discord_bot_token": "Discord Bot Token",
+    "default_model": "Default Model",
+    "payment_status": "Payment",
+    "created_at": "Created",
+    "period_start": "Period Start",
+    "period_end": "Period End"
+  },
+  "deploy_status": {
+    "pending_payment": "Pending Payment",
+    "paid": "Paid, Waiting Deploy",
+    "deploying": "Deploying",
+    "deployed": "Deployed",
+    "deploy_failed": "Deploy Failed"
+  },
+  "payment_status": {
+    "pending": "Pending",
+    "paid": "Paid",
+    "failed": "Failed"
+  },
+  "actions": {
+    "edit": "Edit Config",
+    "edit_loading": "Saving...",
+    "repay": "Repay",
+    "repay_loading": "Redirecting...",
+    "deploy": "Deploy",
+    "deploy_loading": "Deploying..."
+  },
+  "edit": {
+    "title": "Edit Pending Deployment",
+    "description": "You can modify all deployment parameters except the plan.",
+    "plan_readonly": "Plan (Read-only)",
+    "bot_name": "Bot Name",
+    "region": "Region",
+    "default_model": "Default Model",
+    "telegram_bot_token": "Telegram Bot Token",
+    "discord_bot_token": "Discord Bot Token",
+    "cancel": "Cancel",
+    "save": "Save Changes"
+  },
+  "confirm": {
+    "title": "Confirm Deployment",
+    "description": "Please confirm the deployment parameters before execution.",
+    "bot_name": "Bot Name",
+    "plan": "Plan",
+    "region": "Region",
+    "default_model": "Default Model",
+    "telegram_bot_token": "Telegram Bot Token",
+    "discord_bot_token": "Discord Bot Token",
+    "cancel": "Cancel",
+    "confirm": "Confirm Deploy"
+  },
+  "toast": {
+    "redirecting_payment": "Redirecting to checkout",
+    "deploy_submitted": "Deployment submitted",
+    "update_success": "Config updated",
+    "bot_name_required": "Bot name is required"
+  }
+}
